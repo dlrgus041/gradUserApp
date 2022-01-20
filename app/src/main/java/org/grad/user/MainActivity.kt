@@ -2,22 +2,27 @@ package org.grad.user
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.edit
 import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
+import com.google.zxing.EncodeHintType
+import com.google.zxing.qrcode.QRCodeWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private var backPressedTime = 0L
+    private val hints = Hashtable<EncodeHintType, String>().apply {
+        put(EncodeHintType.CHARACTER_SET, "UTF-8")
+    }
 
     private lateinit var pref: SharedPreferences
 
@@ -98,8 +103,8 @@ class MainActivity : AppCompatActivity() {
     private fun createQR(view: ImageView, msg: String) {
         view.setImageBitmap(
             BarcodeEncoder().createBitmap(
-                MultiFormatWriter().encode(
-                    msg, BarcodeFormat.QR_CODE, 300, 300
+                QRCodeWriter().encode(
+                    msg, BarcodeFormat.QR_CODE, 300, 300, hints
                 )
             )
         )
