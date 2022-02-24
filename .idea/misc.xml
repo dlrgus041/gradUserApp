@@ -5,10 +5,11 @@
       <map>
         <entry key="..\:/User/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/User/app/src/main/res/layout/activity_main2.xml" value="0.1296875" />
+        <entry key="..\:/UserApplication/app/src/main/res/layout/activity_main.xml" value="0.264" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

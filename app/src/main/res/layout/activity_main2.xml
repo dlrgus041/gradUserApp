@@ -12,85 +12,65 @@
         android:layout_height="match_parent"
         android:id="@+id/layoutInfo">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/box"
+            android:orientation="vertical"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/btnQR"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TableRow>
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="이름"
+                android:layout_margin="5dp"
+                android:id="@+id/editTextName"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/editTextPhone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="이름"
-                        android:textSize="20sp"
-                        android:gravity="center"/>
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:hint="전화번호"
+                android:layout_margin="5dp"
+                android:textSize="20sp"
+                android:id="@+id/editTextPhone"
+                app:layout_constraintBottom_toTopOf="@id/editTextAddress"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextName" />
 
-                <EditText
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:id="@+id/editTextName"
-                        android:textSize="20sp" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextAddress"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextPhone">
 
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="전화번호"
-                        android:textSize="20sp"
-                        android:gravity="center"/>
-
-                <EditText
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:inputType="phone"
-                        android:id="@+id/editTextPhone"
-                        android:textSize="20sp" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="주소"
-                        android:textSize="20sp"
-                        android:gravity="center"/>
-
-                <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/spinner1"
-                        android:spinnerMode="dialog" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
+            <Spinner
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner1" />
 
-                <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/spinner2"
-                        android:spinnerMode="dialog" />
+            <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner2" />
 
-            </TableRow>
+        </LinearLayout>
 
-        </TableLayout>
+        </LinearLayout>
 
         <Button
             android:layout_width="wrap_content"

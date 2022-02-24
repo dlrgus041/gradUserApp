@@ -1,13 +1,12 @@
 package org.grad.user
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.edit
@@ -35,6 +34,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var modify: Button
     private lateinit var imgView: ImageView
 
+    private lateinit var spn1: Spinner
+    private lateinit var spn2: Spinner
+
+    private lateinit var adArr: IntArray
+    private var addrA = "null"
+    private var addrB = "null"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -47,17 +53,48 @@ class MainActivity : AppCompatActivity() {
 
         name = findViewById(R.id.editTextName)
         phone = findViewById(R.id.editTextPhone)
-        address = findViewById(R.id.editTextAddress)
+
+        adArr = intArrayOf(
+            R.array.addr0, R.array.addr1, R.array.addr2, R.array.addr3,
+            R.array.addr4, R.array.addr5, R.array.addr6, R.array.addr7,
+            R.array.addr8, R.array.addr9, R.array.addr10, R.array.addr11,
+            R.array.addr12, R.array.addr13, R.array.addr14, R.array.addr15, R.array.addr16
+        )
+
+        spn1 = findViewById(R.id.spinner1)
+        spn2 = findViewById(R.id.spinner2)
+        enableSecondSpinner(false)
+
+        spn1.adapter = ArrayAdapter.createFromResource(this, R.array.addr0, android.R.layout.simple_spinner_dropdown_item)
+        spn1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                if (position > 0) {
+                    addrA = parent?.getItemAtPosition(position).toString()
+                    changeSecondSpinner(position)
+                    enableSecondSpinner(true)
+                    addrB = "null"
+                } else enableSecondSpinner(false)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
 
         confirm = findViewById(R.id.btnQR)
         confirm.setOnClickListener {
-            pref.edit {
-                putString("name", name.text.toString())
-                putString("phone", phone.text.toString())
-                putString("address", address.text.toString())
+            if (name.text.isEmpty() || phone.text.isEmpty() || addrA == "null" || addrB == "null") alertError()
+            else {
+                pref.edit {
+                    putString("name", name.text.toString())
+                    putString("phone", phone.text.toString())
+                    putString("addrA", addrA)
+                    putString("addrB", addrB)
+                }
+                createQR(imgView, makeMsg())
+                switchInfoToQR()
             }
-            createQR(imgView, makeMsg())
-            switchInfoToQR()
         }
 
         modify = findViewById(R.id.btnInfoModify)
@@ -82,6 +119,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun alertError() {
+        AlertDialog.Builder(this).setTitle("오류").setMessage(
+            if (name.text.isEmpty()) "이름을 입력해주세요."
+            else if (phone.text.isEmpty()) "전화번호를 입력해주세요."
+            else "주소를 입력해주세요."
+        ).setPositiveButton("확인") { _, _ -> }.show()
+    }
+
     private fun switchInfoToQR() {
         layoutInfo.visibility = View.INVISIBLE
         layoutQR.visibility = View.VISIBLE
@@ -96,7 +141,8 @@ class MainActivity : AppCompatActivity() {
         return with(pref) {
             getString("name", "null") + "#" +
                     getString("phone", "null") + "$" +
-                    getString("address", "null")
+                    getString("addrA", "null") +
+                    getString("addrB", "null")
         }
     }
 
@@ -108,5 +154,24 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
+    }
+
+    fun enableSecondSpinner(flag: Boolean) {
+        spn2.isEnabled = flag
+        spn2.isClickable = flag
+    }
+
+    fun changeSecondSpinner(position: Int) {
+        spn2.adapter = ArrayAdapter.createFromResource(this, adArr[position], android.R.layout.simple_spinner_dropdown_item)
+        spn2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                addrB = if (position > 0) parent?.getItemAtPosition(position).toString() else "null"
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
     }
 }
