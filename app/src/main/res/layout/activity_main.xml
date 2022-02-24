@@ -27,14 +27,16 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:text="이름"
                         android:textSize="20sp"
                         android:gravity="center"/>
 
                 <EditText
-                        android:layout_width="300dp"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_margin="10dp"
                         android:id="@+id/editTextName"
                         android:textSize="20sp" />
 
@@ -45,14 +47,16 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:text="전화번호"
                         android:textSize="20sp"
                         android:gravity="center"/>
 
                 <EditText
-                        android:layout_width="300dp"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_margin="10dp"
                         android:inputType="phone"
                         android:id="@+id/editTextPhone"
                         android:textSize="20sp" />
@@ -64,13 +68,16 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:text="주소"
                         android:textSize="20sp"
                         android:gravity="center"/>
 
                 <Spinner
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:id="@+id/spinner1"
                         android:spinnerMode="dialog" />
 
@@ -83,8 +90,10 @@
                     android:layout_height="wrap_content"/>
 
                 <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_margin="10dp"
                         android:id="@+id/spinner2"
                         android:spinnerMode="dialog" />
 
