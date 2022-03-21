@@ -38,6 +38,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:id="@+id/editTextName"
+                        android:background="@drawable/text_design"
                         android:textSize="20sp" />
 
             </TableRow>
@@ -59,6 +60,7 @@
                         android:layout_margin="10dp"
                         android:inputType="phone"
                         android:id="@+id/editTextPhone"
+                        android:background="@drawable/text_design"
                         android:textSize="20sp" />
 
             </TableRow>

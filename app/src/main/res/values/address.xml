@@ -2,13 +2,14 @@
 <resources>
     <string-array name="addr0">
         <item>--선택--</item>
-        <item>서울시</item>
-        <item>광주시</item>
-        <item>대구시</item>
-        <item>대전시</item>
-        <item>부산시</item>
-        <item>울산시</item>
-        <item>인천시</item>
+        <item>서울특별시</item>
+        <item>광주광역시</item>
+        <item>대구광역시</item>
+        <item>대전광역시</item>
+        <item>부산광역시</item>
+        <item>울산광역시</item>
+        <item>인천광역시</item>
+        <item>세종특별자치시</item>
         <item>강원도</item>
         <item>경기도</item>
         <item>경상남도</item>
@@ -51,6 +52,15 @@
 
     <string-array name="addr2">
         <item>--선택--</item>
+        <item>광산구</item>
+        <item>남구</item>
+        <item>동구</item>
+        <item>북구</item>
+        <item>서구</item>
+    </string-array>
+
+    <string-array name="addr3">
+        <item>--선택--</item>
         <item>남구</item>
         <item>달서구</item>
         <item>동구</item>
@@ -58,15 +68,6 @@
         <item>서구</item>
         <item>수성구</item>
         <item>중구</item>
-    </string-array>
-
-    <string-array name="addr3">
-        <item>--선택--</item>
-        <item>광산구</item>
-        <item>남구</item>
-        <item>동구</item>
-        <item>북구</item>
-        <item>서구</item>
     </string-array>
 
     <string-array name="addr4">
@@ -82,6 +83,7 @@
         <item>--선택--</item>
         <item>강서구</item>
         <item>금정구</item>
+        <item>기장군</item>
         <item>남구</item>
         <item>동구</item>
         <item>동래구</item>
@@ -102,33 +104,54 @@
         <item>남구</item>
         <item>동구</item>
         <item>북구</item>
+        <item>울주군</item>
         <item>중구</item>
     </string-array>
 
     <string-array name="addr7">
         <item>--선택--</item>
-        <item>중구</item>
+        <item>강화군</item>
+        <item>계양구</item>
+        <item>남동구</item>
         <item>동구</item>
         <item>미추홀구</item>
-        <item>연수구</item>
-        <item>남동구</item>
         <item>부평구</item>
         <item>서구</item>
+        <item>연수구</item>
+        <item>옹진군</item>
+        <item>중구</item>
     </string-array>
 
     <string-array name="addr8">
         <item>--선택--</item>
-        <item>강릉</item>
-        <item>동해</item>
-        <item>삼척</item>
-        <item>속초</item>
-        <item>원주</item>
-        <item>춘천</item>
-        <item>태백</item>
+        <item>세종특별자치시</item>
     </string-array>
 
     <string-array name="addr9">
         <item>--선택--</item>
+        <item>강릉</item>
+        <item>고성</item>
+        <item>동해</item>
+        <item>삼척</item>
+        <item>속초</item>
+        <item>양구</item>
+        <item>양양</item>
+        <item>영월</item>
+        <item>원주</item>
+        <item>인제</item>
+        <item>정선</item>
+        <item>철원</item>
+        <item>춘천</item>
+        <item>태백</item>
+        <item>평창</item>
+        <item>홍천</item>
+        <item>화천</item>
+        <item>횡성</item>
+    </string-array>
+
+    <string-array name="addr10">
+        <item>--선택--</item>
+        <item>가평</item>
         <item>고양</item>
         <item>과천</item>
         <item>광명</item>
@@ -146,6 +169,9 @@
         <item>안성</item>
         <item>안양</item>
         <item>양주</item>
+        <item>양평</item>
+        <item>여주</item>
+        <item>연천</item>
         <item>오산</item>
         <item>용인</item>
         <item>의왕</item>
@@ -158,71 +184,134 @@
         <item>화성</item>
     </string-array>
 
-    <string-array name="addr10">
-        <item>--선택--</item>
-        <item>거제</item>
-        <item>김해</item>
-        <item>밀양</item>
-        <item>사천</item>
-        <item>양산</item>
-        <item>진주</item>
-        <item>창원</item>
-        <item>통영</item>
-    </string-array>
-
     <string-array name="addr11">
         <item>--선택--</item>
-        <item>경산</item>
-        <item>경주</item>
-        <item>구미</item>
-        <item>김천</item>
-        <item>문경</item>
-        <item>상주</item>
-        <item>안동</item>
-        <item>영주</item>
-        <item>영천</item>
-        <item>포항</item>
+        <item>거제</item>
+        <item>거창</item>
+        <item>고성</item>
+        <item>김해</item>
+        <item>남해</item>
+        <item>밀양</item>
+        <item>사천</item>
+        <item>산청</item>
+        <item>양산</item>
+        <item>의령</item>
+        <item>진주</item>
+        <item>창녕</item>
+        <item>창원</item>
+        <item>통영</item>
+        <item>하동</item>
+        <item>함안</item>
+        <item>함양</item>
+        <item>합천</item>
     </string-array>
 
     <string-array name="addr12">
         <item>--선택--</item>
-        <item>광양</item>
-        <item>나주</item>
-        <item>목포</item>
-        <item>순천</item>
-        <item>여수</item>
+        <item>경산</item>
+        <item>경주</item>
+        <item>고령</item>
+        <item>구미</item>
+        <item>군위</item>
+        <item>김천</item>
+        <item>문경</item>
+        <item>봉화</item>
+        <item>상주</item>
+        <item>성주</item>
+        <item>안동</item>
+        <item>영양</item>
+        <item>영덕</item>
+        <item>영주</item>
+        <item>영천</item>
+        <item>예천</item>
+        <item>울릉</item>
+        <item>울진</item>
+        <item>의성</item>
+        <item>청도</item>
+        <item>청송</item>
+        <item>칠곡</item>
+        <item>포항</item>
     </string-array>
 
     <string-array name="addr13">
         <item>--선택--</item>
-        <item>군산</item>
-        <item>김제</item>
-        <item>남원</item>
-        <item>익산</item>
-        <item>전주</item>
-        <item>정읍</item>
+        <item>강진</item>
+        <item>고흥</item>
+        <item>곡성</item>
+        <item>광양</item>
+        <item>구례</item>
+        <item>나주</item>
+        <item>담양</item>
+        <item>목포</item>
+        <item>무안</item>
+        <item>보성</item>
+        <item>순천</item>
+        <item>신안</item>
+        <item>여수</item>
+        <item>영광</item>
+        <item>영암</item>
+        <item>완도</item>
+        <item>장성</item>
+        <item>장흥</item>
+        <item>진도</item>
+        <item>함평</item>
+        <item>해남</item>
+        <item>화순</item>
     </string-array>
 
     <string-array name="addr14">
         <item>--선택--</item>
-        <item>계룡</item>
-        <item>공주</item>
-        <item>논산</item>
-        <item>당진</item>
-        <item>보령</item>
-        <item>서산</item>
-        <item>아산</item>
-        <item>천안</item>
+        <item>고창</item>
+        <item>군산</item>
+        <item>김제</item>
+        <item>남원</item>
+        <item>무주</item>
+        <item>부안</item>
+        <item>순창</item>
+        <item>완주</item>
+        <item>익산</item>
+        <item>임실</item>
+        <item>장수</item>
+        <item>전주</item>
+        <item>정읍</item>
+        <item>진안</item>
     </string-array>
 
     <string-array name="addr15">
         <item>--선택--</item>
+        <item>계룡</item>
+        <item>공주</item>
+        <item>금산</item>
+        <item>논산</item>
+        <item>당진</item>
+        <item>보령</item>
+        <item>부여</item>
+        <item>서산</item>
+        <item>서천</item>
+        <item>아산</item>
+        <item>예산</item>
+        <item>천안</item>
+        <item>청양</item>
+        <item>태안</item>
+        <item>홍성</item>
+    </string-array>
+
+    <string-array name="addr16">
+        <item>--선택--</item>
+        <item>괴산</item>
+        <item>단양</item>
+        <item>보은</item>
+        <item>영동</item>
+        <item>옥천</item>
+        <item>음성</item>
         <item>제천</item>
+        <item>증평</item>
+        <item>진천</item>
         <item>청주</item>
         <item>충주</item>
     </string-array>
 
-    <string-array name="addr16">
+    <string-array name="addr17">
         <item>--선택--</item>
         <item>서귀포</item>
         <item>제주</item>

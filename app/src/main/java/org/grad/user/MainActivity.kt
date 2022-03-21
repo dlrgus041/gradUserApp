@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var layoutQR: ConstraintLayout
     private lateinit var name: EditText
     private lateinit var phone: EditText
-    private lateinit var address: EditText
     private lateinit var confirm: Button
     private lateinit var modify: Button
     private lateinit var imgView: ImageView
@@ -38,8 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spn2: Spinner
 
     private lateinit var adArr: IntArray
-    private var addrA = "null"
-    private var addrB = "null"
+    private var address = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,22 +55,22 @@ class MainActivity : AppCompatActivity() {
             R.array.addr0, R.array.addr1, R.array.addr2, R.array.addr3,
             R.array.addr4, R.array.addr5, R.array.addr6, R.array.addr7,
             R.array.addr8, R.array.addr9, R.array.addr10, R.array.addr11,
-            R.array.addr12, R.array.addr13, R.array.addr14, R.array.addr15, R.array.addr16
+            R.array.addr12, R.array.addr13, R.array.addr14, R.array.addr15,
+            R.array.addr16, R.array.addr17
         )
 
         spn1 = findViewById(R.id.spinner1)
         spn2 = findViewById(R.id.spinner2)
         enableSecondSpinner(false)
 
-        spn1.adapter = ArrayAdapter.createFromResource(this, R.array.addr0, android.R.layout.simple_spinner_dropdown_item)
+        spn1.adapter = ArrayAdapter.createFromResource(this, adArr[0], android.R.layout.simple_spinner_dropdown_item)
         spn1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 if (position > 0) {
-                    addrA = parent?.getItemAtPosition(position).toString()
                     changeSecondSpinner(position)
                     enableSecondSpinner(true)
-                    addrB = "null"
+                    address = 0
                 } else enableSecondSpinner(false)
             }
 
@@ -84,13 +81,12 @@ class MainActivity : AppCompatActivity() {
 
         confirm = findViewById(R.id.btnQR)
         confirm.setOnClickListener {
-            if (name.text.isEmpty() || phone.text.isEmpty() || addrA == "null" || addrB == "null") alertError()
+            if (name.text.isEmpty() || phone.text.isEmpty() || address == 0) alertError()
             else {
                 pref.edit {
                     putString("name", name.text.toString())
                     putString("phone", phone.text.toString())
-                    putString("addrA", addrA)
-                    putString("addrB", addrB)
+                    putInt("address", address)
                 }
                 createQR(imgView, makeMsg())
                 switchInfoToQR()
@@ -139,10 +135,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeMsg(): String {
         return with(pref) {
-            getString("name", "null") + "#" +
-                    getString("phone", "null") + "$" +
-                    getString("addrA", "null") +
-                    getString("addrB", "null")
+            getString("phone", "null") + "$" + getInt("address", 0)
         }
     }
 
@@ -161,12 +154,12 @@ class MainActivity : AppCompatActivity() {
         spn2.isClickable = flag
     }
 
-    fun changeSecondSpinner(position: Int) {
-        spn2.adapter = ArrayAdapter.createFromResource(this, adArr[position], android.R.layout.simple_spinner_dropdown_item)
+    fun changeSecondSpinner(pos: Int) {
+        spn2.adapter = ArrayAdapter.createFromResource(this, adArr[pos], android.R.layout.simple_spinner_dropdown_item)
         spn2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                addrB = if (position > 0) parent?.getItemAtPosition(position).toString() else "null"
+                address = if (position > 0) 1000 + 100 * pos + position else 0
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
