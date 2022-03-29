@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var layoutInfo: ConstraintLayout
     private lateinit var layoutQR: ConstraintLayout
-    private lateinit var name: EditText
+    private lateinit var code: EditText
     private lateinit var phone: EditText
     private lateinit var confirm: Button
     private lateinit var modify: Button
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         layoutInfo = findViewById(R.id.layoutInfo)
         layoutQR = findViewById(R.id.layoutQR)
 
-        name = findViewById(R.id.editTextName)
+        code = findViewById(R.id.editTextId)
         phone = findViewById(R.id.editTextPhone)
 
         adArr = intArrayOf(
@@ -61,9 +61,10 @@ class MainActivity : AppCompatActivity() {
 
         spn1 = findViewById(R.id.spinner1)
         spn2 = findViewById(R.id.spinner2)
+
         enableSecondSpinner(false)
 
-        spn1.adapter = ArrayAdapter.createFromResource(this, adArr[0], android.R.layout.simple_spinner_dropdown_item)
+        spn1.adapter = ArrayAdapter.createFromResource(this, R.array.addr00, android.R.layout.simple_spinner_dropdown_item)
         spn1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
@@ -81,10 +82,10 @@ class MainActivity : AppCompatActivity() {
 
         confirm = findViewById(R.id.btnQR)
         confirm.setOnClickListener {
-            if (name.text.isEmpty() || phone.text.isEmpty() || address == 0) alertError()
+            if (code.text.isEmpty() || phone.text.isEmpty() || address == 0) alertError()
             else {
                 pref.edit {
-                    putString("name", name.text.toString())
+                    putString("id", code.text.toString())
                     putString("phone", phone.text.toString())
                     putInt("address", address)
                 }
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             switchQRToInfo()
         }
 
-        if (pref.contains("name")) createQR(imgView, makeMsg())
+        if (pref.contains("id")) createQR(imgView, makeMsg())
         else switchQRToInfo()
     }
 
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun alertError() {
         AlertDialog.Builder(this).setTitle("오류").setMessage(
-            if (name.text.isEmpty()) "이름을 입력해주세요."
+            if (code.text.isEmpty()) "ID를 입력해주세요."
             else if (phone.text.isEmpty()) "전화번호를 입력해주세요."
             else "주소를 입력해주세요."
         ).setPositiveButton("확인") { _, _ -> }.show()
@@ -135,7 +136,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeMsg(): String {
         return with(pref) {
-            getString("phone", "null") + "$" + getInt("address", 0)
+            getString("id", "-1") + "#" + getString("phone", "null") + "$" + getInt("address", -1)
         }
     }
 
@@ -143,15 +144,15 @@ class MainActivity : AppCompatActivity() {
         view.setImageBitmap(
             BarcodeEncoder().createBitmap(
                 QRCodeWriter().encode(
-                    msg, BarcodeFormat.QR_CODE, 300, 300, hints
+                    msg, BarcodeFormat.QR_CODE, 250, 250, hints
                 )
             )
         )
     }
 
     fun enableSecondSpinner(flag: Boolean) {
-        spn2.isEnabled = flag
         spn2.isClickable = flag
+        spn2.adapter = ArrayAdapter.createFromResource(this, adArr[0], android.R.layout.simple_spinner_dropdown_item)
     }
 
     fun changeSecondSpinner(pos: Int) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="addr0">
-        <item>--선택--</item>
+    <string-array name="addr00">
+        <item>--'도/시' 선택--</item>
         <item>서울특별시</item>
         <item>광주광역시</item>
         <item>대구광역시</item>
@@ -21,8 +21,12 @@
         <item>제주도</item>
     </string-array>
 
+    <string-array name="addr0">
+        <item>'도/시'를 먼저 선택하세요.</item>
+    </string-array>
+
     <string-array name="addr1">
-        <item>--선택--</item>
+        <item>--'군/구' 선택--</item>
         <item>강남구</item>
         <item>강동구</item>
         <item>강북구</item>
@@ -51,7 +55,7 @@
     </string-array>
 
     <string-array name="addr2">
-        <item>--선택--</item>
+        <item>--'군/구' 선택--</item>
         <item>광산구</item>
         <item>남구</item>
         <item>동구</item>
@@ -60,7 +64,7 @@
     </string-array>
 
     <string-array name="addr3">
-        <item>--선택--</item>
+        <item>--'군/구' 선택--</item>
         <item>남구</item>
         <item>달서구</item>
         <item>동구</item>
@@ -71,7 +75,7 @@
     </string-array>
 
     <string-array name="addr4">
-        <item>--선택--</item>
+        <item>--'군/구' 선택--</item>
         <item>대덕구</item>
         <item>동구</item>
         <item>서구</item>
@@ -80,7 +84,7 @@
     </string-array>
 
     <string-array name="addr5">
-        <item>--선택--</item>
+        <item>--'군/구' 선택--</item>
         <item>강서구</item>
         <item>금정구</item>
         <item>기장군</item>
@@ -100,7 +104,7 @@
     </string-array>
 
     <string-array name="addr6">
-        <item>--선택--</item>
+        <item>--'군/구' 선택--</item>
         <item>남구</item>
         <item>동구</item>
         <item>북구</item>
@@ -109,7 +113,7 @@
     </string-array>
 
     <string-array name="addr7">
-        <item>--선택--</item>
+        <item>--'군/구' 선택--</item>
         <item>강화군</item>
         <item>계양구</item>
         <item>남동구</item>
@@ -124,11 +128,11 @@
 
     <string-array name="addr8">
         <item>--선택--</item>
-        <item>세종특별자치시</item>
+        <item>세종시</item>
     </string-array>
 
     <string-array name="addr9">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>강릉</item>
         <item>고성</item>
         <item>동해</item>
@@ -150,7 +154,7 @@
     </string-array>
 
     <string-array name="addr10">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>가평</item>
         <item>고양</item>
         <item>과천</item>
@@ -185,7 +189,7 @@
     </string-array>
 
     <string-array name="addr11">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>거제</item>
         <item>거창</item>
         <item>고성</item>
@@ -207,7 +211,7 @@
     </string-array>
 
     <string-array name="addr12">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>경산</item>
         <item>경주</item>
         <item>고령</item>
@@ -234,7 +238,7 @@
     </string-array>
 
     <string-array name="addr13">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>강진</item>
         <item>고흥</item>
         <item>곡성</item>
@@ -260,7 +264,7 @@
     </string-array>
 
     <string-array name="addr14">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>고창</item>
         <item>군산</item>
         <item>김제</item>
@@ -278,7 +282,7 @@
     </string-array>
 
     <string-array name="addr15">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>계룡</item>
         <item>공주</item>
         <item>금산</item>
@@ -297,7 +301,7 @@
     </string-array>
 
     <string-array name="addr16">
-        <item>--선택--</item>
+        <item>--'시/군' 선택--</item>
         <item>괴산</item>
         <item>단양</item>
         <item>보은</item>
@@ -316,4 +320,5 @@
         <item>서귀포</item>
         <item>제주</item>
     </string-array>
+
 </resources>
