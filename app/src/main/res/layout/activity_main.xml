@@ -41,7 +41,31 @@
                         android:padding="5dp"
                         android:id="@+id/editTextId"
                         android:background="@drawable/text_design"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:hint="ID"/>
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:text="이름"
+                        android:textSize="20sp"
+                        android:gravity="center"/>
+
+                <EditText
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:id="@+id/editTextName"
+                        android:background="@drawable/text_design"
+                        android:textSize="20sp"
+                        android:hint="이름"/>
 
             </TableRow>
 
@@ -64,7 +88,8 @@
                         android:inputType="phone"
                         android:id="@+id/editTextPhone"
                         android:background="@drawable/text_design"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:hint="비밀번호"/>
 
             </TableRow>
 
@@ -85,7 +110,7 @@
                         android:layout_margin="5dp"
                         android:id="@+id/spinner1"
                         android:background="@drawable/spinner_design"
-                        android:spinnerMode="dialog" />
+                        android:spinnerMode="dialog"/>
 
             </TableRow>
 
@@ -129,8 +154,8 @@
             android:visibility="invisible">
 
         <ImageView
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:id="@+id/imgView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

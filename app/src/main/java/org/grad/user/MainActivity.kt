@@ -68,11 +68,9 @@ class MainActivity : AppCompatActivity() {
         spn1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                if (position > 0) {
-                    changeSecondSpinner(position)
-                    enableSecondSpinner(true)
-                    address = 0
-                } else enableSecondSpinner(false)
+                changeSecondSpinner(position)
+                enableSecondSpinner(position > 0)
+                address = 0
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -144,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         view.setImageBitmap(
             BarcodeEncoder().createBitmap(
                 QRCodeWriter().encode(
-                    msg, BarcodeFormat.QR_CODE, 250, 250, hints
+                    msg, BarcodeFormat.QR_CODE, 300, 300, hints
                 )
             )
         )
@@ -152,7 +150,6 @@ class MainActivity : AppCompatActivity() {
 
     fun enableSecondSpinner(flag: Boolean) {
         spn2.isClickable = flag
-        spn2.adapter = ArrayAdapter.createFromResource(this, adArr[0], android.R.layout.simple_spinner_dropdown_item)
     }
 
     fun changeSecondSpinner(pos: Int) {
