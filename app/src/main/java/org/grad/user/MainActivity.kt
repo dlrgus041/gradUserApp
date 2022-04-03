@@ -17,6 +17,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var infoStatus = false
     private var backPressedTime = 0L
     private val hints = Hashtable<EncodeHintType, String>().apply {
         put(EncodeHintType.CHARACTER_SET, "UTF-8")
@@ -26,11 +27,22 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var layoutInfo: ConstraintLayout
     private lateinit var layoutQR: ConstraintLayout
+    private lateinit var frameQR: FrameLayout
+
     private lateinit var code: EditText
+    private lateinit var name: EditText
     private lateinit var phone: EditText
     private lateinit var confirm: Button
+
+    private lateinit var prefCode: TextView
+    private lateinit var prefName: TextView
+    private lateinit var prefPhone: TextView
+    private lateinit var prefAddress: TextView
     private lateinit var modify: Button
+    private lateinit var flip: Button
+
     private lateinit var imgView: ImageView
+    private lateinit var quickInfo: TableLayout
 
     private lateinit var spn1: Spinner
     private lateinit var spn2: Spinner
@@ -43,13 +55,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         pref = getPreferences(Context.MODE_PRIVATE)
+
         imgView = findViewById(R.id.imgView)
+        quickInfo = findViewById(R.id.quickInfo)
 
         layoutInfo = findViewById(R.id.layoutInfo)
         layoutQR = findViewById(R.id.layoutQR)
+        frameQR = findViewById(R.id.frameQR)
 
-        code = findViewById(R.id.editTextId)
+        code = findViewById(R.id.editTextCode)
+        name = findViewById(R.id.editTextName)
         phone = findViewById(R.id.editTextPhone)
+
+        prefCode = findViewById(R.id.prefCode)
+        prefName = findViewById(R.id.prefName)
+        prefPhone = findViewById(R.id.prefPhone)
+        prefAddress = findViewById(R.id.prefAddress)
 
         adArr = intArrayOf(
             R.array.addr0, R.array.addr1, R.array.addr2, R.array.addr3,
@@ -62,20 +83,18 @@ class MainActivity : AppCompatActivity() {
         spn1 = findViewById(R.id.spinner1)
         spn2 = findViewById(R.id.spinner2)
 
-        enableSecondSpinner(false)
+        spn2.isClickable = false
 
         spn1.adapter = ArrayAdapter.createFromResource(this, R.array.addr00, android.R.layout.simple_spinner_dropdown_item)
         spn1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                 changeSecondSpinner(position)
-                enableSecondSpinner(position > 0)
+                spn2.isClickable = (position > 0)
                 address = 0
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
 
         confirm = findViewById(R.id.btnQR)
@@ -83,23 +102,32 @@ class MainActivity : AppCompatActivity() {
             if (code.text.isEmpty() || phone.text.isEmpty() || address == 0) alertError()
             else {
                 pref.edit {
-                    putString("id", code.text.toString())
+                    putString("code", code.text.toString())
+                    putString("name", name.text.toString())
                     putString("phone", phone.text.toString())
                     putInt("address", address)
                 }
                 createQR(imgView, makeMsg())
-                switchInfoToQR()
+                layoutSwitchInfoToQR()
             }
         }
 
-        modify = findViewById(R.id.btnInfoModify)
-        modify.setOnClickListener {
-            pref.edit { clear() }
-            switchQRToInfo()
+        flip = findViewById(R.id.btnFlip)
+        flip.setOnClickListener {
+            if (infoStatus) imageSwitchInfoToQR() else imageSwitchQRToInfo()
+            infoStatus = !infoStatus
         }
 
-        if (pref.contains("id")) createQR(imgView, makeMsg())
-        else switchQRToInfo()
+        modify = findViewById(R.id.btnModify)
+        modify.setOnClickListener {
+            pref.edit { clear() }
+            layoutSwitchQRToInfo()
+            imageSwitchInfoToQR()
+            infoStatus = false
+        }
+
+        if (pref.contains("code")) createQR(imgView, makeMsg())
+        else layoutSwitchQRToInfo()
     }
 
     override fun onBackPressed() {
@@ -116,29 +144,51 @@ class MainActivity : AppCompatActivity() {
 
     private fun alertError() {
         AlertDialog.Builder(this).setTitle("오류").setMessage(
-            if (code.text.isEmpty()) "ID를 입력해주세요."
+            if (code.text.isEmpty()) "인증번호를 입력해주세요."
             else if (phone.text.isEmpty()) "전화번호를 입력해주세요."
             else "주소를 입력해주세요."
         ).setPositiveButton("확인") { _, _ -> }.show()
     }
 
-    private fun switchInfoToQR() {
+    private fun layoutSwitchInfoToQR() {
         layoutInfo.visibility = View.INVISIBLE
         layoutQR.visibility = View.VISIBLE
     }
 
-    private fun switchQRToInfo() {
+    private fun layoutSwitchQRToInfo() {
         layoutInfo.visibility = View.VISIBLE
         layoutQR.visibility = View.INVISIBLE
     }
 
+    private fun imageSwitchInfoToQR() {
+        quickInfo.visibility = View.INVISIBLE
+        imgView.visibility = View.VISIBLE
+        modify.visibility = View.INVISIBLE
+        flip.text = "입력 정보 보기"
+    }
+
+    private fun imageSwitchQRToInfo() {
+        quickInfo.visibility = View.VISIBLE
+        imgView.visibility = View.INVISIBLE
+        modify.visibility = View.VISIBLE
+        flip.text = "QR코드 보기"
+    }
+
     private fun makeMsg(): String {
         return with(pref) {
-            getString("id", "-1") + "#" + getString("phone", "null") + "$" + getInt("address", -1)
+            getString("code", "-1") + "#" + getString("phone", "null") + "$" + getInt("address", -1)
         }
     }
 
     private fun createQR(view: ImageView, msg: String) {
+
+        with(pref) {
+            prefCode.text = getString("code", "code")
+            prefName.text = getString("name", "name")
+            prefPhone.text = getString("phone", "phone")
+            prefAddress.text = getInt("address", -1).toString()
+        }
+
         view.setImageBitmap(
             BarcodeEncoder().createBitmap(
                 QRCodeWriter().encode(
@@ -146,13 +196,11 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         )
+
+        view.setBackgroundResource(R.drawable.layout_design)
     }
 
-    fun enableSecondSpinner(flag: Boolean) {
-        spn2.isClickable = flag
-    }
-
-    fun changeSecondSpinner(pos: Int) {
+    private fun changeSecondSpinner(pos: Int) {
         spn2.adapter = ArrayAdapter.createFromResource(this, adArr[pos], android.R.layout.simple_spinner_dropdown_item)
         spn2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
@@ -160,9 +208,7 @@ class MainActivity : AppCompatActivity() {
                 address = if (position > 0) 1000 + 100 * pos + position else 0
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
     }
 }
