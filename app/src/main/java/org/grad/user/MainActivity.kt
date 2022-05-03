@@ -144,7 +144,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun alertError() {
         AlertDialog.Builder(this).setTitle("오류").setMessage(
-            if (code.text.isEmpty()) "인증번호를 입력해주세요."
+            if (code.text.isEmpty()) "ID를 입력해주세요."
+            else if (!check(code.text.toString())) "잘못된 ID입니다."
             else if (phone.text.isEmpty()) "전화번호를 입력해주세요."
             else "주소를 입력해주세요."
         ).setPositiveButton("확인") { _, _ -> }.show()
@@ -210,5 +211,19 @@ class MainActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
+    }
+
+    private fun check(id: String): Boolean {
+
+        var target = id.toInt()
+        if (target / 100000 > 2) return false
+
+        var sum = 0
+        for (i in 1 .. 6) {
+            sum += i * (target % 10)
+            target /= 10
+        }
+
+        return sum % 7 == 0
     }
 }

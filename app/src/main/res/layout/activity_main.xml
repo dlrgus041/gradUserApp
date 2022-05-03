@@ -29,7 +29,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="10dp"
-                        android:text="인증번호"
+                        android:text="ID"
                         android:textSize="20sp"
                         android:gravity="center"/>
 
@@ -43,7 +43,7 @@
                         android:inputType="number"
                         android:background="@drawable/text_design"
                         android:textSize="20sp"
-                        android:hint="인증번호"/>
+                        android:hint="ID"/>
 
             </TableRow>
 
