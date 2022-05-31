@@ -165,8 +165,9 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
             <ImageView
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
+                    android:layout_width="175dp"
+                    android:layout_height="175dp"
+                    android:layout_gravity="center"
                     android:id="@+id/imgView" />
 
             <TableLayout

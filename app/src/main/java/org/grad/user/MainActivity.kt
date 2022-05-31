@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +14,8 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -52,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(R.layout.activity_main)
 
         pref = getPreferences(Context.MODE_PRIVATE)
@@ -177,7 +181,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeMsg(): String {
         return with(pref) {
-            getString("code", "-1") + "#" + getString("phone", "null") + "$" + getInt("address", -1)
+            getString("code", "-1") + "#" + getString("phone", "null") + "$" + getInt("address", -1).toString() + "t" + System.currentTimeMillis()
         }
     }
 
@@ -193,7 +197,7 @@ class MainActivity : AppCompatActivity() {
         view.setImageBitmap(
             BarcodeEncoder().createBitmap(
                 QRCodeWriter().encode(
-                    msg, BarcodeFormat.QR_CODE, 300, 300, hints
+                    msg, BarcodeFormat.QR_CODE, 175, 175, hints
                 )
             )
         )
@@ -216,9 +220,8 @@ class MainActivity : AppCompatActivity() {
     private fun check(id: String): Boolean {
 
         var target = id.toInt()
-        if (target / 100000 > 2) return false
-
         var sum = 0
+
         for (i in 1 .. 6) {
             sum += i * (target % 10)
             target /= 10
